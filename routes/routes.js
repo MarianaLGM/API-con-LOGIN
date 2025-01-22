@@ -5,7 +5,19 @@ const router=express.Router();
 const axios=require("axios");
 
 
+
 router.get('/', (req, res) => {
+    //Comprobamos si el usuario ya está logeado para cambiar la ruta
+    if (req.session.token){
+        const usuarioLogeado = `
+        <h2>Bienvenido</h2>
+        <a href="/search">Ir al buscador de personajes</a><br>
+        <form action="/logout" method="post">
+            <button type="submit">Cerrar sesión</button>
+         </form>
+        `
+        return res.send(usuarioLogeado);
+    }
     const loginForm = `
         <form action="/login" method="post">
         <label for="username">Usuario:</label>
