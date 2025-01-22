@@ -65,7 +65,7 @@ router.get("/characters", async (req, res)=>{//accedemos a usuarios para que nos
             res.status(404).json({message: "personaje no encontrado", error:ERROR})
         }
     })
-
+/*
 router.get('/search', (req, res) => {
         const characterForm = `
             <form action="/search" method="post">
@@ -104,7 +104,7 @@ router.post('/logout', (req, res) => {
           }
           res.redirect('/');
         });
-      });   
+      });   */
 
 module.exports=router;
 
