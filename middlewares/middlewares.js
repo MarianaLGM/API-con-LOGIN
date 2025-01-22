@@ -1,9 +1,10 @@
 const jwt = require("jsonwebtoken");
 const users=require("../users/users");
 
-//-MIDDLEWARE GENERACIÓN Función para generar un token JWT utilizando la información del usuario.
+//-Función para generar un token JWT utilizando la información del usuario.
 
 function generateToken(user) {
+    console.log("este token se ha generado",user)
     return jwt.sign({ user: user.id }, "tu_secreto_secreto", { expiresIn: "1h" });
     }
 
@@ -11,7 +12,7 @@ function generateToken(user) {
 
 function verifyToken(req, res, next) {
     const token = req.session.token;
-    
+    console.log("este es el middleware")
     if (!token) {
     return res.status(401).json({ message: "Token no proporcionado" });
     }   

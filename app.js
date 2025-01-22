@@ -3,6 +3,9 @@ const axios=require("axios");
 const app=express();
 const session = require("express-session");
 
+const { verifyToken } = require("./middlewares/middlewares");
+
+
 const PORT=3000;
 
 
@@ -22,7 +25,11 @@ app.use(
     })
     );
 
+
+app.use("/characters", verifyToken)
+
 const routes=require("./routes/routes");
+
 app.use("/", routes);
 
 
