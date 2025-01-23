@@ -47,14 +47,28 @@ router.get('/', (req, res) => {
         if (user) { //ERROR
         const token = generateToken(user);
         req.session.token = token;
-        res.redirect("/characters");//respuesta al dashboard si hay usuario
+        console.log(token)
+        res.status(200).json({ message: "login exitoso", token });
+        //res.redirect("/characters");//respuesta al dashboard si hay usuario
         } else { //si no hay usuario respondemos con el status 401
         res.status(401).json({ message: "Credenciales incorrectas" });
         }
     });
+router.get("/characters", (req,res)=>{
+    if (req.session.token){
+        const prueba = `
+        <h2>Holaaaaaa</h2>
+        `
+        return res.send(prueba);
+    }else{
+        return res.send("error");
+    }
+})
+    
 
-
+/*
 router.get("/characters", async (req, res)=>{//accedemos a usuarios para que nos devuelva todo el json
+
     const url=("https://rickandmortyapi.com/api/character") 
         try{
             const response=await axios.get(url)//ASINCRONÍA
@@ -64,7 +78,7 @@ router.get("/characters", async (req, res)=>{//accedemos a usuarios para que nos
         }catch (ERROR){
             res.status(404).json({message: "personaje no encontrado", error:ERROR})
         }
-    })
+    })*/
 
 router.get('/search', (req, res) => {
         const characterForm = `
@@ -80,8 +94,8 @@ router.get('/search', (req, res) => {
             res.send(characterForm);
         });
 
-router.post("/search", async (req, res)=>{
-    const rickAndMortyNombre=req.body.nombre
+router.post("/search/:nombre", async (req, res)=>{
+    const rickAndMortyNombre=req.params.nombre
     
     const url=(`https://rickandmortyapi.com/api/character/?name=${rickAndMortyNombre}`) 
     
@@ -100,7 +114,7 @@ router.post('/logout', (req, res) => {
           if (err) {
             console.error('Error al cerrar sesión:', err);
           }
-          res.redirect('/');
+          res.send("sesión cerrada con éxito");
         });
       });  
 
