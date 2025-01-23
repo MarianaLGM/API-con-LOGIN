@@ -65,15 +65,13 @@ router.get("/characters", async (req, res)=>{//accedemos a usuarios para que nos
             res.status(404).json({message: "personaje no encontrado", error:ERROR})
         }
     })
-/*
+
 router.get('/search', (req, res) => {
         const characterForm = `
             <form action="/search" method="post">
             <label for="Nombre personaje"></label>
             <input type="text" id="Nombre personajes" name="nombre" required><br>
             <button type="submit">Enviar</button>
-    
-            <button type="submit">Logout</button>
             </form>
     
             <a href="/search/:nombre">dashboard</a>
@@ -95,7 +93,7 @@ router.post("/search", async (req, res)=>{
         }catch (ERROR){
             res.status(404).json({error: "personaje no encontrado"})
         }
-    })*/
+    })
 
 router.post('/logout', (req, res) => {
         req.session.destroy((err) => {
@@ -104,7 +102,7 @@ router.post('/logout', (req, res) => {
           }
           res.redirect('/');
         });
-      });   
+      });  
 
 module.exports=router;
 
