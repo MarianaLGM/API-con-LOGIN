@@ -95,7 +95,7 @@ router.post("/search", async (req, res)=>{
         }catch (ERROR){
             res.status(404).json({error: "personaje no encontrado"})
         }
-    })
+    })*/
 
 router.post('/logout', (req, res) => {
         req.session.destroy((err) => {
@@ -104,7 +104,7 @@ router.post('/logout', (req, res) => {
           }
           res.redirect('/');
         });
-      });   */
+      });   
 
 module.exports=router;
 
